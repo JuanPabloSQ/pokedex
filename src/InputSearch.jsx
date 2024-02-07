@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 
-export default function InputSearch({ onSearch }) {
+const InputSearch = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
@@ -39,4 +40,10 @@ export default function InputSearch({ onSearch }) {
       </IconButton>
     </Paper>
   );
-}
+};
+
+InputSearch.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+};
+
+export default InputSearch;

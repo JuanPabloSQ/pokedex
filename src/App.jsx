@@ -3,6 +3,8 @@ import PokeStats from "./Graph";
 import InputSearch from "./InputSearch";
 import Box from '@mui/material/Box';
 import FetchPokemon from './Fetch';
+import {typeColors} from "./TypeColors"
+
 
 function App() {
   const { pokemonData, handleSearch } = FetchPokemon();
@@ -35,16 +37,17 @@ function App() {
               pokeType={pokemonData.types[0].type.name}
               image={pokemonData.sprites.other["official-artwork"].front_default}
             />
-            <PokeStats 
-              stats={[
-                pokemonData.stats[0].base_stat,
-                pokemonData.stats[1].base_stat,
-                pokemonData.stats[2].base_stat,
-                pokemonData.stats[3].base_stat,
-                pokemonData.stats[4].base_stat,
-                pokemonData.stats[5].base_stat
-              ]} 
-            />
+<PokeStats
+  stats={[
+    pokemonData.stats[0].base_stat,
+    pokemonData.stats[1].base_stat,
+    pokemonData.stats[2].base_stat,
+    pokemonData.stats[3].base_stat,
+    pokemonData.stats[4].base_stat,
+    pokemonData.stats[5].base_stat
+  ]}
+  pokeTypeColor={typeColors[pokemonData.types[0].type.name.toLowerCase()] || '#68A090'}
+/>
           </Box>
         )}
       </Box>
