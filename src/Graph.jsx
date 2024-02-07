@@ -3,13 +3,13 @@ import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 
-const RadarChart = ({ stats }) => { // Define 'stats' como prop
+const PokeStats = ({ stats }) => { 
 
   const data = {
     labels: ['HP', 'Attack', 'Defense', 'Special-Attack', 'Special-Defense', 'Speed'],
     datasets: [{
       label: 'PokeStats',
-      data: stats, // Utiliza 'stats' como prop para los datos
+      data: stats, 
       fill: true,
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
       borderColor: 'rgb(54, 162, 235)',
@@ -60,4 +60,4 @@ const RadarChart = ({ stats }) => { // Define 'stats' como prop
   );
 };
 
-export default RadarChart;
+export default PokeStats;

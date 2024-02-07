@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PokemonCard from "./card";
-import RadarChart from "./Graph";
+import PokeStats from "./Graph";
 import InputSearch from "./InputSearch";
 import Box from '@mui/material/Box';
 
@@ -48,7 +48,7 @@ function App() {
               pokeType={pokemonData.types[0].type.name}
               image={pokemonData.sprites.other["official-artwork"].front_default}
             />
-            <RadarChart 
+            <PokeStats 
               stats={[
                 pokemonData.stats[0].base_stat,
                 pokemonData.stats[1].base_stat,
