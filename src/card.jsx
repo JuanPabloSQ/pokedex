@@ -5,49 +5,73 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-function PokemonCard({ image, pokeName, pokeType }) {
-  return (
-    <Card sx={{ maxWidth: 345, backgroundColor: "#242424", }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={image} // Usa la prop image aquí
-          alt={pokeName} // Usa pokeName como alt text
-        />
-        <CardContent>
-          <Typography 
-            gutterBottom 
-            variant="h5" 
-            component="div"
-            sx={{
-              textAlign: 'center', // Centra el texto horizontalmente
-              color: 'white',
-            }}
-          >
-            {pokeName}
-          </Typography>
-          <Typography 
-            variant="body2" 
-            color="text.secondary" 
-            sx={{
-              backgroundColor: 'yellow', // Fondo amarillo
-              borderRadius: '10px', // Bordes redondeados
-              padding: '2px', // Añade un poco de espacio alrededor del texto
-              display: 'inline-block', // Ajusta el fondo solo alrededor del texto
-              textAlign: 'center', // Centra el texto horizontalmente
-              width: '100%', // Asegura que el contenedor tome todo el ancho para centrar el texto correctamente
-            }}
-          >
-            {pokeType}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  );
+const typeColors = {
+    normal: '#A8A878',
+    fire: '#F08030',
+    fighting: '#C03028',
+    water: '#6890F0',
+    flying: '#A890F0',
+    grass: '#78C850',
+    poison: '#A040A0',
+    electric: '#F8D030',
+    ground: '#E0C068',
+    psychic: '#F85888',
+    rock: '#B8A038',
+    ice: '#98D8D8',
+    bug: '#A8B820',
+    dragon: '#7038F8',
+    ghost: '#705898',
+    dark: '#705848',
+    steel: '#B8B8D0',
+    fairy: '#EE99AC',
+  };
+
+  function PokemonCard({ image, pokeName, pokeType }) {
+    const backgroundColor = typeColors[pokeType.toLowerCase()] || '#68A090'; 
+
+    return (
+      <Card sx={{ maxWidth: 500, backgroundColor: "#242424" }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="200" 
+            image={image}
+            alt={pokeName}
+          />
+          <CardContent>
+            <Typography 
+              gutterBottom 
+              variant="h5" 
+              component="div"
+              sx={{
+                textAlign: 'center', 
+                color: 'white',
+              }}
+            >
+              {pokeName}
+            </Typography>
+            <Typography 
+              variant="body2" 
+              color="text.secondary" 
+              sx={{
+                backgroundColor: backgroundColor, 
+                borderRadius: '10px',
+                padding: '2px',
+                display: 'inline-block',
+                textAlign: 'center',
+                width: '100%',
+              }}
+            >
+              {pokeType}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    );
 }
 
-// Definición de PropTypes fuera del cuerpo del componente
+
+
 PokemonCard.propTypes = {
   image: PropTypes.string.isRequired,
   pokeName: PropTypes.string.isRequired,

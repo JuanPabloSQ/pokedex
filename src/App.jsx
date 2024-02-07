@@ -1,45 +1,65 @@
+import { useState } from 'react';
 import PokemonCard from "./card";
 import RadarChart from "./Graph";
 import InputSearch from "./InputSearch";
 import Box from '@mui/material/Box';
-import test from "./content"; // Asegúrate de que la estructura de 'test' coincida con lo esperado
 
 function App() {
+  const [pokemonData, setPokemonData] = useState(null);
+
+  const handleSearch = async (searchTerm) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Pokemon not found');
+      const data = await response.json();
+      setPokemonData(data);
+    } catch (error) {
+      console.error(error);
+      setPokemonData(null); 
+    }
+  };
+
   return (
     <>
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column', // Alinea los elementos en una columna
-          justifyContent: 'center', // Centra los elementos verticalmente en el contenedor
-          alignItems: 'center', // Centra los elementos horizontalmente
-          minHeight: '100vh', // Asegura que el Box ocupe al menos el alto de la ventana
-          width: '100vw', // Asegura que el Box ocupe el ancho completo de la ventana
-          marginTop: '20px',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+          width: '100vw',
+          paddingTop: '20px',
         }}
       >
-        <InputSearch />
-        {test.map((pokemon, index) => (
-          <Box
-            key={index} // Considera usar un identificador único si está disponible
-            sx={{
-              margin: '20px',
-            }}
-          >
+        <InputSearch onSearch={handleSearch} />
+        {pokemonData && (
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            width: '100%', 
+            marginTop: '20px',
+          }}>
             <PokemonCard
-              pokeName={pokemon.name}
-              pokeType={pokemon.types[0].type.name} // Corrección aquí
-              image={pokemon.sprites.other["official-artwork"].front_default}
+              pokeName={pokemonData.name}
+              pokeType={pokemonData.types[0].type.name}
+              image={pokemonData.sprites.other["official-artwork"].front_default}
+            />
+            <RadarChart 
+              stats={[
+                pokemonData.stats[0].base_stat,
+                pokemonData.stats[1].base_stat,
+                pokemonData.stats[2].base_stat,
+                pokemonData.stats[3].base_stat,
+                pokemonData.stats[4].base_stat,
+                pokemonData.stats[5].base_stat
+              ]} 
             />
           </Box>
-        ))}
-        <Box
-          sx={{
-            margin: '20px',
-          }}
-        >
-          <RadarChart />
-        </Box>
+        )}
       </Box>
     </>
   );

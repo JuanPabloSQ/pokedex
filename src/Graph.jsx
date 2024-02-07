@@ -1,25 +1,15 @@
 import { Radar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 
-// Registra todos los elementos necesarios para Chart.js una sola vez
 Chart.register(...registerables);
 
-const RadarChart = () => {
+const RadarChart = ({ stats }) => { // Define 'stats' como prop
+
   const data = {
-    labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
+    labels: ['HP', 'Attack', 'Defense', 'Special-Attack', 'Special-Defense', 'Speed'],
     datasets: [{
-      label: 'My First Dataset',
-      data: [65, 59, 90, 81, 56, 55, 40],
-      fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgb(255, 99, 132)',
-      pointBackgroundColor: 'rgb(255, 99, 132)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(255, 99, 132)'
-    }, {
-      label: 'My Second Dataset',
-      data: [28, 48, 40, 19, 96, 27, 100],
+      label: 'PokeStats',
+      data: stats, // Utiliza 'stats' como prop para los datos
       fill: true,
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
       borderColor: 'rgb(54, 162, 235)',
@@ -64,7 +54,7 @@ const RadarChart = () => {
   };
 
   return (
-    <div style={{ background: '#333', padding: '10px', borderRadius: '10px', width: '100%', maxWidth: '400px', height: 'auto', minHeight: '500px' }}>
+    <div style={{ background: '#333', padding: '10px', borderRadius: '10px', width: '400px', height: '400px', minHeight: '300px' }}>
       <Radar data={data} options={options} />
     </div>
   );
