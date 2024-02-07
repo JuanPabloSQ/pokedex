@@ -24,8 +24,8 @@ function App() {
         margin: 'auto',
         boxShadow: `0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1), 0 0 10px ${boxShadowColor}`,
         borderRadius: '12px',
-        position: 'relative', // Agrega position relative
-        zIndex: 1, // Asegura que el input esté en frente
+        position: 'relative', 
+        zIndex: 1, 
       }}
     >
       <InputSearch onSearch={handleSearch} />
