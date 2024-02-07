@@ -12,7 +12,7 @@ function PokemonCard({ image, pokeName, pokeType }) {
     const upperCasePokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
 
     return (
-        <Card sx={{ maxWidth: 500, backgroundColor: "#242424" }}>
+        <Card sx={{ maxWidth: 500, backgroundColor: "#242424", border: 'none', }}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -42,8 +42,8 @@ function PokemonCard({ image, pokeName, pokeType }) {
                             display: 'inline-block',
                             textAlign: 'center',
                             width: '100%',
-                            fontWeight: 'bold',  // Negrita
-                            textShadow: '0px 0px 5px white',  // Sombreado blanco
+                            fontWeight: 'bold',  
+                            textShadow: '0px 0px 5px white',  
                         }}
                     >
                         {pokeType}
