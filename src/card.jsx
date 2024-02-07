@@ -62,6 +62,8 @@ function PokemonCard({ image, pokeName, pokeType }) {
                             display: 'inline-block',
                             textAlign: 'center',
                             width: '100%',
+                            fontWeight: 'bold',  // Negrita
+                            textShadow: '0px 0px 5px white',  // Sombreado blanco
                         }}
                     >
                         {pokeType}
