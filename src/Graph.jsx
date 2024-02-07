@@ -64,7 +64,7 @@ const RadarChart = () => {
   };
 
   return (
-    <div style={{ background: '#333', padding: '10px', borderRadius: '10px', width: '100%', maxWidth: '600px', height: 'auto', minHeight: '500px' }}>
+    <div style={{ background: '#333', padding: '10px', borderRadius: '10px', width: '100%', maxWidth: '400px', height: 'auto', minHeight: '500px' }}>
       <Radar data={data} options={options} />
     </div>
   );
