@@ -2,6 +2,7 @@ import PokemonCard from "./card";
 import RadarChart from "./Graph";
 import InputSearch from "./InputSearch";
 import Box from '@mui/material/Box';
+import test from "./content"; // Asegúrate de que la estructura de 'test' coincida con lo esperado
 
 function App() {
   return (
@@ -18,16 +19,23 @@ function App() {
         }}
       >
         <InputSearch />
+        {test.map((pokemon, index) => (
+          <Box
+            key={index} // Considera usar un identificador único si está disponible
+            sx={{
+              margin: '20px',
+            }}
+          >
+            <PokemonCard
+              pokeName={pokemon.name}
+              pokeType={pokemon.types[0].type.name} // Corrección aquí
+              image={pokemon.sprites.other["official-artwork"].front_default}
+            />
+          </Box>
+        ))}
         <Box
           sx={{
-            margin: '20px', // Añade un poco de espacio alrededor de cada componente
-          }}
-        >
-          <PokemonCard />
-        </Box>
-        <Box
-          sx={{
-            margin: '20px', // Añade un poco de espacio alrededor de cada componente
+            margin: '20px',
           }}
         >
           <RadarChart />

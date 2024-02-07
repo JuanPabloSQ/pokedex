@@ -1,4 +1,4 @@
-{
+const test = [{
   "abilities": [
     {
       "ability": {
@@ -12571,4 +12571,6 @@
     }
   ],
   "weight": 60
-}
+}];
+
+export default test
