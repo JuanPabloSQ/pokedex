@@ -1,4 +1,4 @@
-import PokemonCard from "./card";
+import PokemonCard from "./Card";
 import PokeStats from "./Graph";
 import InputSearch from "./InputSearch";
 import Box from '@mui/material/Box';
