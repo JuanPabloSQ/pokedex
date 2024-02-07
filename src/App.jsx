@@ -4,9 +4,7 @@ import InputSearch from "./InputSearch";
 import Box from '@mui/material/Box';
 import FetchPokemon from './Fetch';
 
-
 function App() {
-
   const { pokemonData, handleSearch } = FetchPokemon();
 
   return (
