@@ -9,6 +9,7 @@ import { typeColors } from './TypeColors';
 import Welcome from "./Welcome";
 import InputEvol from "./InputEvol";
 import InputPreEvol from "./InputPreEvol";
+import { handleEeveeEvolution } from './evolveUtils';
 
 function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
@@ -38,20 +39,27 @@ function App() {
         const pokemonSpeciesUrl = pokemonData.species.url;
         const speciesResponse = await fetch(pokemonSpeciesUrl);
         const speciesData = await speciesResponse.json();
-
+  
         const evolutionChainUrl = speciesData.evolution_chain.url;
         const evolutionChainResponse = await fetch(evolutionChainUrl);
         const evolutionChainData = await evolutionChainResponse.json();
-
+  
         const firstEvolutionName =
           evolutionChainData.chain.evolves_to[0]?.species.name;
         const secondEvolutionName =
           evolutionChainData.chain.evolves_to[0]?.evolves_to[0]?.species.name;
-
+  
+        // Manejar evoluciones especiales de Eevee
+        if (pokemonData.name === 'eevee' || pokemonData.name === 'vaporeon' || pokemonData.name === 'jolteon') {
+          handleEeveeEvolution(pokemonData, handleSearch, setEvolutionData);
+          return;
+        }
+  
+        // Resto de la lógica de evolución
         if (firstEvolutionName && secondEvolutionName === pokemonData.name) {
           return;
         }
-
+  
         if (firstEvolutionName) {
           if (firstEvolutionName === pokemonData.name) {
             if (secondEvolutionName) {
