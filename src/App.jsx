@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PokemonCard from './Card';
+import PokemonCard from './PokemonCard';
 import PokeStats from './Graph';
 import InputSearch from './InputSearch';
 import Box from '@mui/material/Box';
@@ -51,7 +51,7 @@ function App() {
           }}>
             <PokemonCard
               pokeName={pokemonData.name}
-              pokeType={pokemonData.types[0].type.name}
+              pokeType={pokemonData.types}
               image={pokemonData.sprites.other['official-artwork'].front_default}
             />
             <PokeStats

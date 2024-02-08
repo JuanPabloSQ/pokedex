@@ -7,7 +7,6 @@ import { CardActionArea } from '@mui/material';
 import {typeColors} from "./TypeColors"
 
 function PokemonCard({ image, pokeName, pokeType }) {
-    const backgroundColor = typeColors[pokeType.toLowerCase()] || '#68A090';
 
     const upperCasePokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
 
@@ -32,11 +31,12 @@ function PokemonCard({ image, pokeName, pokeType }) {
                     >
                         {upperCasePokeName}
                     </Typography>
-                    <Typography 
+                        {pokeType.map(type => <Typography 
                         variant="body2" 
+                        key={type.type.name}
                         color="text.secondary" 
                         sx={{
-                            backgroundColor: backgroundColor, 
+                            backgroundColor: typeColors[type.type.name.toLowerCase()] || '#68A090',
                             borderRadius: '10px',
                             padding: '2px',
                             display: 'inline-block',
@@ -44,10 +44,10 @@ function PokemonCard({ image, pokeName, pokeType }) {
                             width: '100%',
                             fontWeight: 'bold',  
                             textShadow: '0px 0px 5px white',  
+
                         }}
-                    >
-                        {pokeType}
-                    </Typography>
+                    > {type.type.name}</Typography> )}
+                    
                 </CardContent>
             </CardActionArea>
         </Card>
