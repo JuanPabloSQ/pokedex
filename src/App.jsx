@@ -38,9 +38,7 @@ function App() {
       }}
     >
       <InputSearch onSearch={firstLoad ? handleWelcome : handleSearch} />
-      {firstLoad && (
-        <Welcome/>
-      )}
+      {firstLoad && <Welcome />}
       {error ? (
         <BasicAlerts />
       ) : (
@@ -51,13 +49,22 @@ function App() {
             alignItems: 'center',
             marginTop: '20px',
           }}>
-            <PokemonCard
-              pokeName={pokemonData.name}
-              pokeType={pokemonData.types}
-              image={pokemonData.sprites.other['official-artwork'].front_default}
-            />
-            <InputEvol/>
-            <InputPreEvol/>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                marginBottom: '20px',
+              }}
+            >
+              {!firstLoad && <InputPreEvol />}
+              <PokemonCard
+                pokeName={pokemonData.name}
+                pokeType={pokemonData.types}
+                image={pokemonData.sprites.other['official-artwork'].front_default}
+              />
+              {!firstLoad && <InputEvol />}
+            </Box>
             <PokeStats
               stats={[
                 pokemonData.stats[0].base_stat,
@@ -77,3 +84,4 @@ function App() {
 }
 
 export default App;
+
