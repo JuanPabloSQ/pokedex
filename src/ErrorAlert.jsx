@@ -25,7 +25,7 @@ export default function BasicAlerts() {
           <img
             src="https://i.postimg.cc/N06CXd9n/pikachu-Error.png"
             alt="PokeImagen"
-            style={{ maxWidth: '100%', height: 'auto' }}
+            style={{maxWidth: '100%', height: 'auto'}}
           />
         </Box>
       </Alert>
