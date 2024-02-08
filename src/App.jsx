@@ -40,14 +40,16 @@ function App() {
         const evolutionChainData = await evolutionChainResponse.json();
 
         const firstEvolutionName =
-          evolutionChainData.chain.evolves_to[0]?.species.name
+          evolutionChainData.chain.evolves_to[0]?.species.name;
         const secondEvolutionName =
           evolutionChainData.chain.evolves_to[0]?.evolves_to[0]?.species.name;
 
+        if (firstEvolutionName && secondEvolutionName === pokemonData.name) {
+          return;
+        }
+
         if (firstEvolutionName) {
           if (firstEvolutionName === pokemonData.name) {
-
-
             if (secondEvolutionName) {
               handleSearch(secondEvolutionName);
               setEvolutionData({
@@ -66,7 +68,6 @@ function App() {
       console.error('Error al obtener información de evolución:', error);
     }
   };
-
   const handlePreEvolClick = async () => {
     try {
       if (pokemonData) {
