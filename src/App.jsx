@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PokemonCard from './PokemonCard';
 import PokeStats from './Graph';
 import InputSearch from './InputSearch';
@@ -14,9 +14,96 @@ function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
   const boxShadowColor = typeColors[pokemonData?.types[0]?.type?.name?.toLowerCase()] || '#68A090';
   const [firstLoad, setFirstLoad] = useState(true);
+  const [evolutionData, setEvolutionData] = useState(null);
+  const [preEvolutionData, setPreEvolutionData] = useState(null);
+
+  useEffect(() => {
+    if (!firstLoad) {
+      setEvolutionData(null);
+      setPreEvolutionData(null);
+    }
+  }, [pokemonData, firstLoad]);
 
   const handleWelcome = () => {
     setFirstLoad(false);
+  };
+
+  const handleEvolClick = async () => {
+    try {
+      if (pokemonData) {
+        const pokemonSpeciesUrl = pokemonData.species.url;
+        const speciesResponse = await fetch(pokemonSpeciesUrl);
+        const speciesData = await speciesResponse.json();
+
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+        const evolutionChainResponse = await fetch(evolutionChainUrl);
+        const evolutionChainData = await evolutionChainResponse.json();
+
+        const firstEvolutionName =
+          evolutionChainData.chain.evolves_to[0]?.species.name
+        const secondEvolutionName =
+          evolutionChainData.chain.evolves_to[0]?.evolves_to[0]?.species.name;
+
+        if (firstEvolutionName) {
+          if (firstEvolutionName === pokemonData.name) {
+
+
+            if (secondEvolutionName) {
+              handleSearch(secondEvolutionName);
+              setEvolutionData({
+                evolutionName: secondEvolutionName,
+              });
+            }
+          } else {
+            handleSearch(firstEvolutionName);
+            setEvolutionData({
+              evolutionName: firstEvolutionName,
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error al obtener información de evolución:', error);
+    }
+  };
+
+  const handlePreEvolClick = async () => {
+    try {
+      if (pokemonData) {
+        const pokemonSpeciesUrl = pokemonData.species.url;
+        const speciesResponse = await fetch(pokemonSpeciesUrl);
+        const speciesData = await speciesResponse.json();
+
+        const evolutionChainUrl = speciesData.evolution_chain.url;
+        const evolutionChainResponse = await fetch(evolutionChainUrl);
+        const evolutionChainData = await evolutionChainResponse.json();
+
+        const firstPreEvolutionName =
+          evolutionChainData.chain.species.name ||
+          evolutionChainData.chain.evolves_to[0]?.species.name;
+
+        if (firstPreEvolutionName) {
+          if (firstPreEvolutionName === pokemonData.name) {
+            const secondPreEvolutionName =
+              evolutionChainData.chain.evolves_to[0]?.species.name;
+
+            if (secondPreEvolutionName) {
+              handleSearch(secondPreEvolutionName);
+              setPreEvolutionData({
+                preEvolutionName: secondPreEvolutionName,
+              });
+            }
+          } else {
+            handleSearch(firstPreEvolutionName);
+            setPreEvolutionData({
+              preEvolutionName: firstPreEvolutionName,
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error al obtener información de pre-evolución:', error);
+    }
   };
 
   return (
@@ -57,13 +144,13 @@ function App() {
                 marginBottom: '20px',
               }}
             >
-              {!firstLoad && <InputPreEvol />}
+              {!firstLoad && <InputPreEvol onPreEvolClick={handlePreEvolClick} />}
               <PokemonCard
-                pokeName={pokemonData.name}
+                pokeName={preEvolutionData?.preEvolutionName || evolutionData?.evolutionName || pokemonData.name}
                 pokeType={pokemonData.types}
                 image={pokemonData.sprites.other['official-artwork'].front_default}
               />
-              {!firstLoad && <InputEvol />}
+              {!firstLoad && <InputEvol onEvolClick={handleEvolClick} />}
             </Box>
             <PokeStats
               stats={[
@@ -84,4 +171,3 @@ function App() {
 }
 
 export default App;
-

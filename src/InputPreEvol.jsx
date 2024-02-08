@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
 
-export default function InputPreEvol() {
+const InputPreEvol = ({ onPreEvolClick }) => {
   return (
     <Stack direction="row" spacing={2}>
       <Button
@@ -16,3 +17,8 @@ export default function InputPreEvol() {
     </Stack>
   );
 }
+InputPreEvol.propTypes = {
+    onPreEvolClick: PropTypes.func.isRequired,
+  };
+  
+  export default InputPreEvol;
