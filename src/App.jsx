@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PokemonCard from './Card';
 import PokeStats from './Graph';
 import InputSearch from './InputSearch';
@@ -5,10 +6,16 @@ import Box from '@mui/material/Box';
 import BasicAlerts from './ErrorAlert';
 import FetchPokemon from './Fetch';
 import { typeColors } from './TypeColors';
+import Welcome from "./Welcome";
 
 function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
   const boxShadowColor = typeColors[pokemonData?.types[0]?.type?.name?.toLowerCase()] || '#68A090';
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  const handleWelcome = () => {
+    setFirstLoad(false);
+  };
 
   return (
     <Box
@@ -28,7 +35,10 @@ function App() {
         zIndex: 1,
       }}
     >
-      <InputSearch onSearch={handleSearch} />
+      <InputSearch onSearch={firstLoad ? handleWelcome : handleSearch} />
+      {firstLoad && (
+        <Welcome/>
+      )}
       {error ? (
         <BasicAlerts />
       ) : (
