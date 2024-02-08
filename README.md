@@ -1,8 +1,26 @@
-# React + Vite
+# De "PokeDex"
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Descripción
+La siguiente página web presenta una PokeDex, utilizando Vite + React para lograr un diseño responsivo y eficiente. Se utiliza fetch para obtener datos directamente de la API de Pokémon, permitiendo así obtener imágenes, nombres, tipos y estadísticas de los Pokémon.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+En la interfaz, el color del gráfico junto con el sombreado cambiará según el tipo de Pokémon buscado.
+
+
+
+## Instrucciones de depliegue
+
+1. **Clonar el repositorio**
+    ```bash
+    git clone https://github.com/JuanPabloSQ/Proyecto-3
+    ```
+
+2. **Entrar a la carpeta Proyecto-2 y ejecutar el archivo index.html**
+
+
+## Tecnologias utilizadas
+
+- Esta página web fue creada utilizando HTML5, Javascript, CSS, Node.js, Vite + React, junto con las librerías Charts.js y Material UI para la organización del contenido.
+
+## Enlace a páginas GitHub
+https://juanpablosq.github.io/Proyecto-3/
