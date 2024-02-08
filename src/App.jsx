@@ -9,7 +9,7 @@ import { typeColors } from './TypeColors';
 import Welcome from "./Welcome";
 import InputEvol from "./InputEvol";
 import InputPreEvol from "./InputPreEvol";
-import { handleEeveeEvolution } from './evolveUtils';
+import { handleEeveeEvolution, handleEeveePreEvolution } from './evolveUtils';
 
 function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
@@ -49,13 +49,19 @@ function App() {
         const secondEvolutionName =
           evolutionChainData.chain.evolves_to[0]?.evolves_to[0]?.species.name;
   
-        // Manejar evoluciones especiales de Eevee
-        if (pokemonData.name === 'eevee' || pokemonData.name === 'vaporeon' || pokemonData.name === 'jolteon') {
+        if (pokemonData.name === 'eevee' ||
+         pokemonData.name === 'vaporeon' || 
+         pokemonData.name === 'jolteon' || 
+         pokemonData.name === 'flareon' || 
+         pokemonData.name === 'espeon'|| 
+         pokemonData.name === 'umbreon' || 
+         pokemonData.name === 'leafeon'|| 
+         pokemonData.name === 'glaceon'|| 
+         pokemonData.name === 'sylveon') {
           handleEeveeEvolution(pokemonData, handleSearch, setEvolutionData);
           return;
         }
   
-        // Resto de la lógica de evolución
         if (firstEvolutionName && secondEvolutionName === pokemonData.name) {
           return;
         }
@@ -98,6 +104,17 @@ function App() {
           evolutionChainData.chain.evolves_to[0]?.species.name;
         const secondEvolutionName =
           evolutionChainData.chain.evolves_to[0]?.evolves_to[0]?.species.name;
+
+          if (pokemonData.name === 'jolteon' || 
+          pokemonData.name === 'flareon' || 
+          pokemonData.name === 'espeon'|| 
+          pokemonData.name === 'umbreon' || 
+          pokemonData.name === 'leafeon'|| 
+          pokemonData.name === 'glaceon'|| 
+          pokemonData.name === 'sylveon') {
+            handleEeveePreEvolution(pokemonData, handleSearch, setPreEvolutionData);
+           return;
+         }
   
         if (secondPreEvolutionName === pokemonData.name) {
           handleSearch(firstPreEvolutionName);
