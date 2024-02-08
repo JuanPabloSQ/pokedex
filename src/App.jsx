@@ -17,6 +17,7 @@ function App() {
   const [evolutionData, setEvolutionData] = useState(null);
   const [preEvolutionData, setPreEvolutionData] = useState(null);
 
+
   useEffect(() => {
     if (!firstLoad) {
       setEvolutionData(null);
@@ -24,8 +25,10 @@ function App() {
     }
   }, [pokemonData, firstLoad]);
 
-  const handleWelcome = () => {
-    setFirstLoad(false);
+  const handleWelcome = (pokeName) => {
+    if (firstLoad)
+      setFirstLoad(false);
+    handleSearch(pokeName)
   };
 
   const handleEvolClick = async () => {
@@ -122,7 +125,7 @@ function App() {
         zIndex: 1,
       }}
     >
-      <InputSearch onSearch={firstLoad ? handleWelcome : handleSearch} />
+      <InputSearch onSearch={handleWelcome} />
       {firstLoad && <Welcome />}
       {error ? (
         <BasicAlerts />

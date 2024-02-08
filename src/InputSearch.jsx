@@ -10,13 +10,14 @@ const InputSearch = ({ onSearch }) => {
 
   const handleSearch = () => {
     if (searchTerm.trim() !== '') {
-      onSearch(searchTerm.trim().toLowerCase()); 
+      onSearch(searchTerm.trim().toLowerCase());
+      setSearchTerm(''); 
     }
   };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      event.preventDefault(); 
+      event.preventDefault();
       handleSearch();
     }
   };
@@ -25,7 +26,7 @@ const InputSearch = ({ onSearch }) => {
     <Paper
       component="form"
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-      onSubmit={(e) => e.preventDefault()} 
+      onSubmit={(e) => e.preventDefault()}
     >
       <InputBase
         sx={{ ml: 1, flex: 1 }}
