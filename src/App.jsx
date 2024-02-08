@@ -7,6 +7,8 @@ import BasicAlerts from './ErrorAlert';
 import FetchPokemon from './Fetch';
 import { typeColors } from './TypeColors';
 import Welcome from "./Welcome";
+import InputEvol from "./InputEvol";
+import InputPreEvol from "./InputPreEvol";
 
 function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
@@ -54,6 +56,8 @@ function App() {
               pokeType={pokemonData.types}
               image={pokemonData.sprites.other['official-artwork'].front_default}
             />
+            <InputEvol/>
+            <InputPreEvol/>
             <PokeStats
               stats={[
                 pokemonData.stats[0].base_stat,
