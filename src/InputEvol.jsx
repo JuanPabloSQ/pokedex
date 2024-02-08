@@ -11,7 +11,7 @@ const InputEvol = ({ onEvolClick }) => {
         startIcon={<ArrowForwardIosIcon />}
         onClick={onEvolClick}
         sx={{
-          border: 'none', // Elimina el borde
+          border: 'none',
         }}
       >
       </Button>

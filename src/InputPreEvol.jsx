@@ -11,7 +11,7 @@ const InputPreEvol = ({ onPreEvolClick }) => {
         startIcon={<ArrowBackIosNewIcon />}
         onClick={onPreEvolClick}
         sx={{
-          border: 'none', // Elimina el borde
+          border: 'none', 
         }}
       >
       </Button>
