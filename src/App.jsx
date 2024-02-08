@@ -68,46 +68,42 @@ function App() {
       console.error('Error al obtener información de evolución:', error);
     }
   };
+
   const handlePreEvolClick = async () => {
     try {
       if (pokemonData) {
         const pokemonSpeciesUrl = pokemonData.species.url;
         const speciesResponse = await fetch(pokemonSpeciesUrl);
         const speciesData = await speciesResponse.json();
-
+  
         const evolutionChainUrl = speciesData.evolution_chain.url;
         const evolutionChainResponse = await fetch(evolutionChainUrl);
         const evolutionChainData = await evolutionChainResponse.json();
-
+  
         const firstPreEvolutionName =
-          evolutionChainData.chain.species.name
+          evolutionChainData.chain.species.name;
         const secondPreEvolutionName =
           evolutionChainData.chain.evolves_to[0]?.species.name;
-
-        if (firstPreEvolutionName && secondPreEvolutionName === pokemonData.name) {
-            return;
-        }
-        if (firstPreEvolutionName) {
-          if (firstPreEvolutionName === pokemonData.name) {
-            if (secondPreEvolutionName) {
-              handleSearch(secondPreEvolutionName);
-              setPreEvolutionData({
-                preEvolutionName: secondPreEvolutionName,
-              });
-            }
-          } else {
-            handleSearch(firstPreEvolutionName);
-            setPreEvolutionData({
-              preEvolutionName: firstPreEvolutionName,
-            });
-          }
+        const secondEvolutionName =
+          evolutionChainData.chain.evolves_to[0]?.evolves_to[0]?.species.name;
+  
+        if (secondPreEvolutionName === pokemonData.name) {
+          handleSearch(firstPreEvolutionName);
+          setPreEvolutionData({
+            preEvolutionName: firstPreEvolutionName,
+          });
+        } else if (secondEvolutionName === pokemonData.name) {
+          handleSearch(secondPreEvolutionName);
+          setPreEvolutionData({
+            preEvolutionName: secondPreEvolutionName,
+          });
         }
       }
     } catch (error) {
       console.error('Error al obtener información de pre-evolución:', error);
     }
   };
-
+  
   return (
     <Box
       sx={{
