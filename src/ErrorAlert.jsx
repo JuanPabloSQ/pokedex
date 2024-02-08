@@ -23,7 +23,7 @@ export default function BasicAlerts() {
             <Typography variant="body1">Nombre de Pokemon incorrecto</Typography>
           </Box>
           <img
-            src="./assets/pikachuError.PNG"
+            src="https://i.postimg.cc/N06CXd9n/pikachu-Error.png"
             alt="PokeImagen"
             style={{ maxWidth: '100%', height: 'auto' }}
           />
