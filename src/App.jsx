@@ -80,14 +80,15 @@ function App() {
         const evolutionChainData = await evolutionChainResponse.json();
 
         const firstPreEvolutionName =
-          evolutionChainData.chain.species.name ||
+          evolutionChainData.chain.species.name
+        const secondPreEvolutionName =
           evolutionChainData.chain.evolves_to[0]?.species.name;
 
+        if (firstPreEvolutionName && secondPreEvolutionName === pokemonData.name) {
+            return;
+        }
         if (firstPreEvolutionName) {
           if (firstPreEvolutionName === pokemonData.name) {
-            const secondPreEvolutionName =
-              evolutionChainData.chain.evolves_to[0]?.species.name;
-
             if (secondPreEvolutionName) {
               handleSearch(secondPreEvolutionName);
               setPreEvolutionData({
