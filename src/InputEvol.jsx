@@ -3,10 +3,16 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Stack from '@mui/material/Stack';
 
 export default function InputEvol() {
-  return (
-    <Stack direction="row" spacing={2}>
-      <Button variant="outlined" startIcon={<ArrowForwardIosIcon />}>
-      </Button>
-    </Stack>
-  );
-}
+    return (
+        <Stack direction="row" spacing={2}>
+          <Button
+            variant="outlined"
+            startIcon={<ArrowForwardIosIcon />}
+            sx={{
+              border: 'none', // Elimina el borde
+            }}
+          >
+          </Button>
+        </Stack>
+      );
+    }
