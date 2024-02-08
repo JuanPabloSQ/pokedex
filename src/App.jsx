@@ -13,6 +13,7 @@ import InputPreEvol from "./InputPreEvol";
 function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
   const boxShadowColor = typeColors[pokemonData?.types[0]?.type?.name?.toLowerCase()] || '#68A090';
+  const evolButtonColor = typeColors[pokemonData?.types[0]?.type?.name?.toLowerCase()] || '#68A090';
   const [firstLoad, setFirstLoad] = useState(true);
   const [evolutionData, setEvolutionData] = useState(null);
   const [preEvolutionData, setPreEvolutionData] = useState(null);
@@ -145,13 +146,13 @@ function App() {
                 marginBottom: '20px',
               }}
             >
-              {!firstLoad && <InputPreEvol onPreEvolClick={handlePreEvolClick} />}
+              {!firstLoad && <InputPreEvol onPreEvolClick={handlePreEvolClick} evolButtonColor={evolButtonColor} />}
               <PokemonCard
                 pokeName={preEvolutionData?.preEvolutionName || evolutionData?.evolutionName || pokemonData.name}
                 pokeType={pokemonData.types}
                 image={pokemonData.sprites.other['official-artwork'].front_default}
               />
-              {!firstLoad && <InputEvol onEvolClick={handleEvolClick} />}
+              {!firstLoad && <InputEvol onEvolClick={handleEvolClick} evolButtonColor={evolButtonColor} />}
             </Box>
             <PokeStats
               stats={[
