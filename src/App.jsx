@@ -9,7 +9,10 @@ import { typeColors } from './TypeColors';
 import Welcome from "./Welcome";
 import InputEvol from "./InputEvol";
 import InputPreEvol from "./InputPreEvol";
-import { handleEeveeEvolution, handleEeveePreEvolution } from './evolveUtils';
+import { handleEeveeEvolution, 
+  handleEeveePreEvolution, 
+  handleTyrogueEvolution, 
+  handleTyroguePreEvolution } from './evolveUtils';
 
 function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
@@ -61,6 +64,13 @@ function App() {
           handleEeveeEvolution(pokemonData, handleSearch, setEvolutionData);
           return;
         }
+
+        if (pokemonData.name === 'tyrogue' ||
+        pokemonData.name === 'hitmonlee' || 
+        pokemonData.name === 'hitmonchan' ) {
+          handleTyrogueEvolution(pokemonData, handleSearch, setEvolutionData);
+         return;
+       }
   
         if (firstEvolutionName && secondEvolutionName === pokemonData.name) {
           return;
@@ -115,6 +125,13 @@ function App() {
             handleEeveePreEvolution(pokemonData, handleSearch, setPreEvolutionData);
            return;
          }
+
+         if (pokemonData.name === 'hitmonlee' || 
+         pokemonData.name === 'hitmonchan' || 
+         pokemonData.name === 'hitmontop') {
+          handleTyroguePreEvolution(pokemonData, handleSearch, setPreEvolutionData);
+          return;
+        }
   
         if (secondPreEvolutionName === pokemonData.name) {
           handleSearch(firstPreEvolutionName);

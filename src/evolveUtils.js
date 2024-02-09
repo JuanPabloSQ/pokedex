@@ -39,6 +39,11 @@ export const handleEeveeEvolution = (pokemonData, handleSearch, setEvolutionData
     setEvolutionData({
       evolutionName: 'sylveon',
     });
+  } else if (pokemonData.name === 'sylveon') {
+    handleSearch('vaporeon');
+    setEvolutionData({
+      evolutionName: 'vaporeon',
+    });
   }
 };
 
@@ -72,6 +77,44 @@ export const handleEeveePreEvolution = (pokemonData, handleSearch, setPreEvoluti
     handleSearch('eevee');
     setPreEvolutionData({
       evolutionName: 'eevee',
+    });
+  }
+};
+
+export const handleTyrogueEvolution = (pokemonData, handleSearch, setEvolutionData) => {
+  if (pokemonData.name === 'tyrogue') {
+    handleSearch('hitmonlee');
+    setEvolutionData({
+      evolutionName: 'hitmonlee',
+    });
+  } else if (pokemonData.name === 'hitmonlee') {
+    handleSearch('hitmonchan');
+    setEvolutionData({
+      evolutionName: 'hitmonchan',
+    });
+  } else if (pokemonData.name === 'hitmonchan') {
+    handleSearch('hitmontop');
+    setEvolutionData({
+      evolutionName: 'hitmontop',
+    });
+  }
+};
+
+export const handleTyroguePreEvolution = (pokemonData, handleSearch, setPreEvolutionData) => {
+  if (pokemonData.name === 'hitmonlee') {
+    handleSearch('tyrogue');
+    setPreEvolutionData({
+      evolutionName: 'tyrogue',
+    });
+  } else if (pokemonData.name === 'hitmonchan') {
+    handleSearch('tyrogue');
+    setPreEvolutionData({
+      evolutionName: 'tyrogue',
+    });
+  } else if (pokemonData.name === 'hitmontop') {
+    handleSearch('tyrogue');
+    setPreEvolutionData({
+      evolutionName: 'tyrogue',
     });
   }
 };
