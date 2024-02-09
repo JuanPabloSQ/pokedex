@@ -1,8 +1,9 @@
 import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box"
 
 const Welcome = () => {
   return (
-    <div>
+    <Box sx={{ height: 650 }}>
       <Typography
         variant="body1"
         style={{
@@ -32,7 +33,7 @@ const Welcome = () => {
       >
         Created by Juan Pablo Sepulveda.
       </Typography>
-    </div>
+    </Box>
   );
 };
 
