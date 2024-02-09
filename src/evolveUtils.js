@@ -78,6 +78,11 @@ export const handleEeveePreEvolution = (pokemonData, handleSearch, setPreEvoluti
     setPreEvolutionData({
       evolutionName: 'eevee',
     });
+  } else if (pokemonData.name === 'sylveon') {
+    handleSearch('eevee');
+    setPreEvolutionData({
+      evolutionName: 'eevee',
+    });
   }
 };
 

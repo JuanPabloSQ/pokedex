@@ -9,10 +9,13 @@ import { typeColors } from './TypeColors';
 import Welcome from "./Welcome";
 import InputEvol from "./InputEvol";
 import InputPreEvol from "./InputPreEvol";
+import CircularIndeterminate from "./CircularIndeterminate"
 import { handleEeveeEvolution, 
   handleEeveePreEvolution, 
   handleTyrogueEvolution, 
   handleTyroguePreEvolution } from './evolveUtils';
+
+  
 
 function App() {
   const { pokemonData, error, handleSearch } = FetchPokemon();
@@ -21,7 +24,7 @@ function App() {
   const [firstLoad, setFirstLoad] = useState(true);
   const [evolutionData, setEvolutionData] = useState(null);
   const [preEvolutionData, setPreEvolutionData] = useState(null);
-
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     if (!firstLoad) {
@@ -31,9 +34,9 @@ function App() {
   }, [pokemonData, firstLoad]);
 
   const handleWelcome = (pokeName) => {
-    if (firstLoad)
-      setFirstLoad(false);
-    handleSearch(pokeName)
+    if (firstLoad) setFirstLoad(false);
+    setLoading(true); 
+    handleSearch(pokeName).finally(() => setLoading(false));
   };
 
   const handleEvolClick = async () => {
@@ -94,6 +97,8 @@ function App() {
       }
     } catch (error) {
       console.error('Error al obtener información de evolución:', error);
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -147,6 +152,8 @@ function App() {
       }
     } catch (error) {
       console.error('Error al obtener información de pre-evolución:', error);
+    } finally {
+      setLoading(false); 
     }
   };
   
@@ -162,13 +169,18 @@ function App() {
         width: '100%',
         maxWidth: '450px',
         margin: 'auto',
-        boxShadow: `0 4px 12px rgba(0, 0, 0, 0.3), 0 0 8px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1), 0 0 10px ${boxShadowColor}`,
+        boxShadow: `0 4px 12px rgba(0, 0, 0, 0.3), 
+         0 0 8px rgba(255, 255, 255, 0.5),
+         inset 0 0 10px rgba(255, 255, 255, 0.2), 
+         inset 0 0 20px rgba(255, 255, 255, 0.1),
+         0 0 10px ${boxShadowColor}`,
         borderRadius: '12px',
         position: 'relative',
         zIndex: 1,
       }}
     >
       <InputSearch onSearch={handleWelcome} />
+      {loading && <CircularIndeterminate />}
       {firstLoad && <Welcome />}
       {error ? (
         <BasicAlerts />
