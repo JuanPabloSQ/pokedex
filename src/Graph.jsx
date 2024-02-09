@@ -63,7 +63,7 @@ const PokeStats = ({ stats, pokeTypeColor }) => {
   };
 
   return (
-    <div style={{ background: '#333', padding: '10px', borderRadius: '10px', width: '400px', height: '400px', minHeight: '300px' }}>
+    <div style={{ background: '#333', padding: '10px', borderRadius: '10px', width: '400px', height: '300px', minHeight: '300px' }}>
       <Radar data={data} options={options} />
     </div>
   );
