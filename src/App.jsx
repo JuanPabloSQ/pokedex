@@ -10,15 +10,15 @@ import Welcome from "./Welcome";
 import InputEvol from "./InputEvol";
 import InputPreEvol from "./InputPreEvol";
 import CircularIndeterminate from "./CircularIndeterminate"
-import { handleEeveeEvolution, 
-  handleEeveePreEvolution, 
-  handleTyrogueEvolution, 
-  handleTyroguePreEvolution } from './evolveUtils';
+import { EeveeEvolution, 
+  EeveePreEvolution, 
+  TyrogueEvolution, 
+  TyroguePreEvolution } from './evolveUtils';
 
   
 
 function App() {
-  const { pokemonData, error, handleSearch } = FetchPokemon();
+  const { pokemonData, error, pokemonSearch } = FetchPokemon();
   const boxShadowColor = typeColors[pokemonData?.types[0]?.type?.name?.toLowerCase()] || '#68A090';
   const evolButtonColor = typeColors[pokemonData?.types[0]?.type?.name?.toLowerCase()] || '#68A090';
   const [firstLoad, setFirstLoad] = useState(true);
@@ -36,10 +36,10 @@ function App() {
   const handleWelcome = (pokeName) => {
     if (firstLoad) setFirstLoad(false);
     setLoading(true); 
-    handleSearch(pokeName).finally(() => setLoading(false));
+    pokemonSearch(pokeName).finally(() => setLoading(false));
   };
 
-  const handleEvolClick = async () => {
+  const EvolClick = async () => {
     try {
       if (pokemonData) {
         const pokemonSpeciesUrl = pokemonData.species.url;
@@ -64,14 +64,14 @@ function App() {
          pokemonData.name === 'leafeon'|| 
          pokemonData.name === 'glaceon'|| 
          pokemonData.name === 'sylveon') {
-          handleEeveeEvolution(pokemonData, handleSearch, setEvolutionData);
+          EeveeEvolution(pokemonData, pokemonSearch, setEvolutionData);
           return;
         }
 
         if (pokemonData.name === 'tyrogue' ||
         pokemonData.name === 'hitmonlee' || 
         pokemonData.name === 'hitmonchan' ) {
-          handleTyrogueEvolution(pokemonData, handleSearch, setEvolutionData);
+          TyrogueEvolution(pokemonData, pokemonSearch, setEvolutionData);
          return;
        }
   
@@ -82,13 +82,13 @@ function App() {
         if (firstEvolutionName) {
           if (firstEvolutionName === pokemonData.name) {
             if (secondEvolutionName) {
-              handleSearch(secondEvolutionName);
+              pokemonSearch(secondEvolutionName);
               setEvolutionData({
                 evolutionName: secondEvolutionName,
               });
             }
           } else {
-            handleSearch(firstEvolutionName);
+            pokemonSearch(firstEvolutionName);
             setEvolutionData({
               evolutionName: firstEvolutionName,
             });
@@ -102,7 +102,7 @@ function App() {
     }
   };
 
-  const handlePreEvolClick = async () => {
+  const PreEvolClick = async () => {
     try {
       if (pokemonData) {
         const pokemonSpeciesUrl = pokemonData.species.url;
@@ -127,24 +127,24 @@ function App() {
           pokemonData.name === 'leafeon'|| 
           pokemonData.name === 'glaceon'|| 
           pokemonData.name === 'sylveon') {
-            handleEeveePreEvolution(pokemonData, handleSearch, setPreEvolutionData);
+            EeveePreEvolution(pokemonData, pokemonSearch, setPreEvolutionData);
            return;
          }
 
          if (pokemonData.name === 'hitmonlee' || 
          pokemonData.name === 'hitmonchan' || 
          pokemonData.name === 'hitmontop') {
-          handleTyroguePreEvolution(pokemonData, handleSearch, setPreEvolutionData);
+          TyroguePreEvolution(pokemonData, pokemonSearch, setPreEvolutionData);
           return;
         }
   
         if (secondPreEvolutionName === pokemonData.name) {
-          handleSearch(firstPreEvolutionName);
+          pokemonSearch(firstPreEvolutionName);
           setPreEvolutionData({
             preEvolutionName: firstPreEvolutionName,
           });
         } else if (secondEvolutionName === pokemonData.name) {
-          handleSearch(secondPreEvolutionName);
+          pokemonSearch(secondPreEvolutionName);
           setPreEvolutionData({
             preEvolutionName: secondPreEvolutionName,
           });
@@ -200,13 +200,13 @@ function App() {
                 marginBottom: '20px',
               }}
             >
-              {!firstLoad && <InputPreEvol onPreEvolClick={handlePreEvolClick} evolButtonColor={evolButtonColor} />}
+              {!firstLoad && <InputPreEvol onPreEvolClick={PreEvolClick} evolButtonColor={evolButtonColor} />}
               <PokemonCard
                 pokeName={preEvolutionData?.preEvolutionName || evolutionData?.evolutionName || pokemonData.name}
                 pokeType={pokemonData.types}
                 image={pokemonData.sprites.other['official-artwork'].front_default}
               />
-              {!firstLoad && <InputEvol onEvolClick={handleEvolClick} evolButtonColor={evolButtonColor} />}
+              {!firstLoad && <InputEvol onEvolClick={EvolClick} evolButtonColor={evolButtonColor} />}
             </Box>
             <PokeStats
               stats={[
