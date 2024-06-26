@@ -12,7 +12,7 @@ En la interfaz, el color del gráfico junto con el sombreado cambiará según el
 
 1. **Clonar el repositorio**
     ```bash
-    git clone https://github.com/JuanPabloSQ/Proyecto-3
+    git clone https://github.com/JuanPabloSQ/pokedex
     ```
 
 2. **Entrar a la carpeta Proyecto-2 y ejecutar el archivo index.html**
@@ -23,4 +23,4 @@ En la interfaz, el color del gráfico junto con el sombreado cambiará según el
 - Esta página web fue creada utilizando HTML5, Javascript, CSS, Node.js, Vite + React, junto con las librerías Charts.js y Material UI para el uso de componentes
 
 ## Enlace a páginas GitHub
-https://juanpablosq.github.io/Proyecto-3/
+https://juanpablosq.github.io/pokedex/
